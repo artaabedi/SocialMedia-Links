@@ -1,23 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaExternalLinkAlt, FaSun, FaMoon } from "react-icons/fa";
-import { IoIosSunny } from "react-icons/io";
+import { FaExternalLinkAlt } from "react-icons/fa";
 import classnames from "classnames";
 import { links } from "../constants";
 import AuthorImage from "../assets/Yash-Gohel.jpg";
 
-const Link = ({ link, isLightTheme }) => (
+const Link = ({ link }) => (
   <motion.a
     href={link.url}
     target="_blank"
     rel="noopener noreferrer"
-    className={classnames(
-      "block rounded-lg p-4 mb-4 transition-all duration-300 shadow-lg flex items-center justify-between mx-4 font-montserrat",
-      {
-        "bg-gray-200 hover:bg-gray-300 text-gray-900": isLightTheme,
-        "bg-gray-800 hover:bg-gray-700 text-white": !isLightTheme,
-      }
-    )}
+    className="block transition-colors transform border rounded-lg p-4 mb-4 transition-all duration-300 shadow-lg flex items-center justify-between mx-4 font-montserrat hover:border-transparent group dark:border-gray-700 dark:hover:border-transparent feature-card text-white"
     initial={{ opacity: 0, y: -20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
@@ -28,33 +21,23 @@ const Link = ({ link, isLightTheme }) => (
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.3, delay: 0.5 }}
     >
-      <link.icon className="mr-4 text-xl" />
-      <span className="text-lg font-medium">{link.title}</span>
+      <link.icon className="mr-4 text-xl group-hover:text-teal-200" />
+      <span className="text-lg font-medium group-hover:text-teal-200">
+        {link.title}
+      </span>
     </motion.span>
     <motion.span
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.3, delay: 0.5 }}
     >
-      <FaExternalLinkAlt className="text-lg" />
+      <FaExternalLinkAlt className="text-lg group-hover:text-teal-200" />
     </motion.span>
   </motion.a>
 );
 
 const LinktreePage = () => {
-  const [isLightTheme, setIsLightTheme] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("All");
-
-  useEffect(() => {
-    const systemPrefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
-    setIsLightTheme(!systemPrefersDark);
-  }, []);
-
-  const toggleTheme = () => {
-    setIsLightTheme((prevTheme) => !prevTheme);
-  };
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
@@ -66,25 +49,24 @@ const LinktreePage = () => {
       : links.filter((link) => link.category === selectedCategory);
 
   return (
-    <div
-      className={classnames("min-h-screen flex flex-col justify-between", {
-        "text-gray-900 bg-gray-100": isLightTheme,
-        "text-white bg-gray-900": !isLightTheme,
-      })}
-    >
+    <div className="min-h-screen flex flex-col justify-between text-white bg-primary overflow-hidden relative">
+      <div className="absolute z-0 w-[80vw] h-[80vw] sm:w-[60vw] sm:h-[60vw] lg:w-[40vw] lg:h-[40vw] -right-[40vw] sm:-right-[30vw] lg:-right-[20vw] rounded-full blue__gradient bottom-[60%] sm:bottom-[50%] lg:bottom-[60%]" />
+      <div className="absolute z-0 w-[80vw] h-[80vw] sm:w-[60vw] sm:h-[60vw] lg:w-[40vw] lg:h-[40vw] -left-[40vw] sm:-left-[30vw] lg:-left-[20vw] rounded-full blue__gradient bottom-[-20%] sm:bottom-[-15%] lg:bottom-[-10%]" />
+
       <div>
         <div className="py-8 text-center relative">
           <motion.img
             src={AuthorImage}
             alt="Author"
-            className="mx-auto w-32 h-32 rounded-full mb-4 border-4 border-gray-700 shadow-lg"
+            className="mx-auto w-32 h-32 rounded-full mb-4 border-2 border-teal-200 shadow-lg"
             style={{ objectFit: "cover" }}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
           />
+
           <motion.h1
-            className="text-4xl font-bold mb-2 font-ubuntu"
+            className="text-3xl sm:text-4xl text-gradient md:text-5xl font-bold mb-2 font-poppins"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -92,7 +74,7 @@ const LinktreePage = () => {
             My Linktree
           </motion.h1>
           <motion.p
-            className="text-lg mb-5 font-palanquin"
+            className="text-base sm:text-lg md:text-xl mb-5 font-palanquin"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
@@ -104,10 +86,12 @@ const LinktreePage = () => {
               <motion.button
                 key={category}
                 className={classnames(
-                  "mr-2 px-3 sm:px-4 py-2 rounded-md text-sm sm:text-base",
+                  "mr-2 px-3 sm:px-4 py-2 rounded-md text-sm   outline-none sm:text-base",
+
                   {
-                    "bg-gray-800 text-white": selectedCategory === category,
-                    "bg-gray-200 text-gray-900": selectedCategory !== category,
+                    " bg-blue-gradient text-gray-900":
+                      selectedCategory === category,
+                    "bg-gray-800 text-white": selectedCategory !== category,
                   }
                 )}
                 onClick={() => handleCategoryClick(category)}
@@ -119,29 +103,19 @@ const LinktreePage = () => {
               </motion.button>
             ))}
           </div>
-          <button
-            className="absolute top-0 right-0 m-4 p-2 rounded-full bg-gray-800 text-white"
-            onClick={toggleTheme}
-          >
-            {isLightTheme ? <FaMoon /> : <IoIosSunny />}
-          </button>
         </div>
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
             <AnimatePresence>
               {filteredLinks.map((link) => (
-                <Link
-                  key={selectedCategory + "-" + link.id}
-                  link={link}
-                  isLightTheme={isLightTheme}
-                />
+                <Link key={selectedCategory + "-" + link.id} link={link} />
               ))}
             </AnimatePresence>
           </div>
         </div>
       </div>
       <motion.p
-        className="text-sm mt-8 pb-4 text-center font-palanquin"
+        className="text-xs text-dimWhite sm:text-sm md:text-base mt-8 pb-4 text-center font-palanquin"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.7 }}
