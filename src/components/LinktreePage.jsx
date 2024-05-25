@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaExternalLinkAlt } from "react-icons/fa";
-import classnames from "classnames";
 import { links } from "../constants";
 import AuthorImage from "../assets/Yash-Gohel.jpg";
 
@@ -10,7 +9,7 @@ const Link = ({ link }) => (
     href={link.url}
     target="_blank"
     rel="noopener noreferrer"
-    className="block transition-colors transform border rounded-lg p-4 mb-4 transition-all duration-300 shadow-lg flex items-center justify-between mx-4 font-montserrat hover:border-transparent group dark:border-gray-700 dark:hover:border-transparent feature-card text-white"
+    className="block transition-colors transform border rounded-lg p-4 mb-4 duration-300 shadow-lg flex items-center justify-between mx-4 font-montserrat hover:border-transparent group dark:border-gray-700 dark:hover:border-transparent feature-card text-white"
     initial={{ opacity: 0, y: -20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
@@ -39,9 +38,7 @@ const Link = ({ link }) => (
 const LinktreePage = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
-  };
+  const handleCategoryClick = (category) => setSelectedCategory(category);
 
   const filteredLinks =
     selectedCategory === "All"
@@ -58,8 +55,7 @@ const LinktreePage = () => {
           <motion.img
             src={AuthorImage}
             alt="Author"
-            className="mx-auto w-32 h-32 rounded-full mb-4 border-2 border-teal-200 shadow-lg"
-            style={{ objectFit: "cover" }}
+            className="mx-auto w-32 h-32 rounded-full mb-4 border-2 border-teal-200 shadow-lg object-cover"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
@@ -85,15 +81,11 @@ const LinktreePage = () => {
             {["All", "Social Media", "Portfolio", "Contact"].map((category) => (
               <motion.button
                 key={category}
-                className={classnames(
-                  "mr-2 px-3 sm:px-4 py-2 rounded-md text-sm   outline-none sm:text-base",
-
-                  {
-                    " bg-blue-gradient text-gray-900":
-                      selectedCategory === category,
-                    "bg-gray-800 text-white": selectedCategory !== category,
-                  }
-                )}
+                className={`mr-2 px-3 sm:px-4 py-2 rounded-md text-sm outline-none sm:text-base ${
+                  selectedCategory === category
+                    ? "bg-blue-gradient text-gray-900"
+                    : "bg-gray-800 text-white"
+                }`}
                 onClick={() => handleCategoryClick(category)}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
