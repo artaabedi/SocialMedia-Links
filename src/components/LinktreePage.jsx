@@ -9,26 +9,38 @@ const Link = ({ link }) => (
     href={link.url}
     target="_blank"
     rel="noopener noreferrer"
-    className="block border rounded-lg p-4 mb-4 transition-colors transform shadow-lg flex items-center justify-between mx-4 font-montserrat hover:border-transparent group dark:border-gray-700 dark:hover:border-transparent feature-card text-white relative"
+    className="block transition-colors transform border rounded-lg p-4 mb-4 transition-all duration-300 shadow-lg flex items-center justify-between mx-4 font-montserrat hover:border-transparent group dark:border-gray-700 dark:hover:border-transparent feature-card text-white relative"
     initial={{ opacity: 0, y: -20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
   >
     <motion.span
-      className="flex items-center relative"
+      className="flex items-center relative" // Add relative class to set z-index
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.3, delay: 0.5 }}
     >
-      {link.icon && <link.icon className="mr-4 text-xl" />}
-      <span className="text-lg font-medium">{link.title}</span>
+      <link.icon
+        className="mr-4 text-xl group-hover:text-teal-200"
+        style={{ zIndex: 2 }}
+      />{" "}
+      {/* Increase z-index */}
+      <span
+        className="text-lg font-medium group-hover:text-teal-200"
+        style={{ zIndex: 2 }}
+      >
+        {link.title}
+      </span>{" "}
+      {/* Increase z-index */}
     </motion.span>
     <motion.span
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.3, delay: 0.5 }}
+      style={{ zIndex: 2 }} // Increase z-index
     >
-      <FaExternalLinkAlt className="text-lg" />
+      <FaExternalLinkAlt className="text-lg group-hover:text-teal-200" />{" "}
+      {/* Increase z-index */}
     </motion.span>
   </motion.a>
 );
