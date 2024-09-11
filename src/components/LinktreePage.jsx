@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { links } from "../constants";
-import AuthorImage from "../assets/Yash-Gohel.jpg";
+import AuthorImage from "../assets/Arta-Abedi.jpg";
 
 const Link = ({ link }) => (
   <motion.a
