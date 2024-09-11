@@ -127,7 +127,7 @@ const LinktreePage = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          © 2024 BurningHat. All rights reserved.
+          © 2024 Arta Abedi. All rights reserved.
         </a>
       </motion.p>
     </div>
