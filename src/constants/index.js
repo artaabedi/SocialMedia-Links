@@ -42,7 +42,7 @@ export const links = [
   {
     id: 5,
     title: "Mail",
-    url: "mailto:hey@artaabedi.com.com",
+    url: "mailto:hey@artaabedi.com",
     icon: IoIosMail,
     category: "Contact",
   },
