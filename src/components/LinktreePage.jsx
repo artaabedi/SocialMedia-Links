@@ -123,7 +123,7 @@ const LinktreePage = () => {
         transition={{ duration: 0.5, delay: 0.7 }}
       >
         <a
-          href="https://burninghat.tech"
+          href="https://artaabedi.com"
           target="_blank"
           rel="noopener noreferrer"
         >
